@@ -44,7 +44,7 @@ function layer_show(title,url,w,h){
 function layer_close(){
 	var index = parent.layer.getFrameIndex(window.name);
 	parent.layer.close(index);
-
+	location.reload();
 }
 
 $('#data-list-table').on('click', 'td input[type=checkbox]' , function(){

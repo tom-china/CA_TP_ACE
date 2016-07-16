@@ -30,13 +30,13 @@ $.extend( $.fn, {
 		}
 
 		// Check if a validator for this form was already created
-		var validator = $.data( this[ 0 ], "validator" );
+		var validator = $.data( this[0], "validator" );
 		if ( validator ) {
 			return validator;
 		}
 
 		// Add novalidate tag if HTML5.
-		this.attr( "novalidate", "novalidate" );
+		this.attr("novalidate","novalidate");
 
 		validator = new $.validator( options, this[ 0 ] );
 		$.data( this[ 0 ], "validator", validator );

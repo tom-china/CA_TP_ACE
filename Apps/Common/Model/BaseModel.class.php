@@ -22,15 +22,15 @@ class BaseModel extends Model
 		$_t=clone $query;
 		$count=$query->where($where)->count();
 		$query=$_t;
-		$Page = new \Think\Page($count, $this->pageRowsCount);
+		$Page=D('Page');
+		$Page->page($count, $this->pageRowsCount);
 		$r = $query->where($where)->order($order)
 		->limit($Page->firstRow . ',' . $Page->listRows)
 		->select();
-		$Page->setConfig('theme','%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
-		$Page->data = array();
 		if ($r) {
 			$Page->data = $r;
 		}
+		$Page->show();
 		return $Page;
 	}
 	public function addResult()

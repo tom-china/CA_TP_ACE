@@ -1,5 +1,5 @@
 <!-- #section:basics/sidebar -->
-<div id="sidebar" class="sidebar                  responsive                    ace-save-state sidebar-fixed">
+<div id="sidebar" class="sidebar responsive ace-save-state sidebar-fixed">
 	<script type="text/javascript">
 		try{ace.settings.loadState('sidebar')}catch(e){}
 	</script>
@@ -53,15 +53,8 @@
 				<ul class="submenu">
 					<volist name='m1._child' id='m2'>
 						<li class="">
-							<a href="{:U($m2['url'])}"  target="content_iframe">
-								<i class="menu-icon fa fa-caret-right"></i>
-
-								{$m2.name}
-								
-							</a>
-
+							<a href="{:U($m2['url'])}"  target="content_iframe"><i class="menu-icon fa fa-caret-right"></i>{$m2.name}</a>
 							<b class="arrow"></b>
-
 						</li>
 					</volist>
 				</ul>
