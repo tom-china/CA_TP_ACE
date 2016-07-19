@@ -17,16 +17,12 @@
 		<div class="form-group">
 			<label class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">分组：</label>
 			<div class="formControls col-xs-12 col-sm-5">
-				<span class="select-box" style="width:150px;">
-					<select id='sltPid' class="select valid" name="pid" size="1" aria-required="true" aria-invalid="false">
-						<option value="0">顶级分组</option>
-						<volist name='lis' id='item'>
-							<option value="{$item.id}">&nbsp;&nbsp;{$item.title_show}</option>
-						</volist>
-					</select>
-					<label id="adminRole-error" class="error valid" for="adminRole"></label>
-				</span>
-
+				<select id='sltPid' class="width-100" name="pid" size="1" aria-required="true" aria-invalid="false">
+					<option value="0">顶级分组</option>
+					<volist name='lis' id='item'>
+						<option value="{$item.id}">&nbsp;&nbsp;{$item.title_show}</option>
+					</volist>
+				</select>
 			</div>
 		</div>
 		<div class="form-group">
@@ -64,7 +60,7 @@
 		<div class="form-group">
 			<label class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">备注：</label>
 			<div class="formControls col-xs-12 col-sm-5">
-				<textarea name="remark"  class="input-xlarge" >{$info.remark}</textarea>
+				<textarea name="remark"  class="form-control" rows="5" placeholder="备注">{$info.remark}</textarea>
 			</div>
 		</div>
 
