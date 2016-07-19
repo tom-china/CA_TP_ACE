@@ -1,4 +1,8 @@
 <extend name="Public/base" />
+<block name='breadcrumb'>
+	<li><a href="#">管理员管理</a></li>
+	<li class="active">权限列表</li>
+</block>
 <block name="body"> 
 	<!-- <div class="text-c"> 
 		<form method="get" action="">
@@ -6,12 +10,13 @@
 			<button type="submit" class="btn btn-success radius"  ><i class="Hui-iconfont"></i> 搜用户</button>
 		</form>
 	</div> -->
-	<div class="cl pd-5 bg-1 bk-gray"> 
-		<span class="l"> 
+	<div class="search-area"> 
+		<span class="pull-left"> 
 			<a href="javascript:;" onclick="data_dels()" class="btn btn-xs btn-danger"><i class="ace-icon fa fa-trash-o "></i> 批量删除</a>
-			<a class="btn btn-xs btn-primary" href="javascript:;" onclick="layer_show('添加权限','{:U("add")}','800','450')"><i class="glyphicon-plus"></i> 添加权限</a>
+			<a class="btn btn-xs btn-primary" href="javascript:;" onclick="layer_show('添加权限','{:U("add")}','800','450')"><i class="glyphicon glyphicon-plus"></i> 添加权限</a>
 		</span>
-		<span class="r">共有数据：<strong>{$lis|count}</strong> 条</span>
+		<span class="pull-right">共有数据：<strong>{$lis|count}</strong> 条</span>
+		<div class="clearfix"></div>
 	</div>
 
 	<table class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer" id="data-list-table" role="grid" aria-describedby="DataTables_Table_0_info">

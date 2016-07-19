@@ -1,73 +1,98 @@
 <extend name="Public/base" />
+<block name='breadcrumb'>
+	<li class="active">修改密码</li>
+</block>
+
 <block name="body">
-	<form class="form form-horizontal"   method="post" id="form-user-add" novalidate="novalidate">
+	<form class="form form-horizontal"   method="post" id="form-admin-add" >
 		<input type="hidden" name="id" value="{$info.id}"/>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>现在的密码：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="password"  name="old" class="input-text" value="" >
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right"><span class="c-red"></span>现在的密码：</label>
+			<div class="formControls col-xs-12 col-sm-5">
+				<input type="password"  name="old" class="input-text" value="" required>
 			</div>
 		</div>
 
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>新密码：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="password" class="input-text" value=""  name="pass">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right"><span class="c-red"></span>新密码：</label>
+			<div class="formControls col-xs-12 col-sm-5">
+				<input type="password" class="input-text" value=""  id="password" name="pass" minlength="6" required>
 			</div>
 		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>再次输入新密码：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="password" class="input-text" value=""  name="agent_pass">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right"><span class="c-red"></span>再次输入新密码：</label>
+			<div class="formControls col-xs-12 col-sm-5">
+				<input type="password" class="input-text" value=""  name="agent_pass" minlength="6" equalTo='#password' required>
 			</div>
 		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+		<div class="clearfix form-actions">
+			<div class="col-md-offset-3 col-md-9">
+				<button class="btn btn-info" type="submit">
+					<i class="ace-icon fa fa-check bigger-110"></i>
+					修改密码
+				</button>
+
+				&nbsp; &nbsp; &nbsp;
+				<button class="btn" type="reset">
+					<i class="ace-icon fa fa-undo bigger-110"></i>
+					重置
+				</button>
 			</div>
 		</div>
 	</form>
 </block>
 <block name='js'>
-
-	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/icheck/jquery.icheck.min.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script> 
-	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
-	<script type="text/javascript" src="__PUBLIC__/H-ui/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+	<script src="__PUBLIC__/ace/components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="__PUBLIC__/ace/components/jquery-validation/src/localization/messages_zh.js"></script>
 	<script type="text/javascript">
-		$(function(){ 
-			$("#form-user-add").validate({
-				debug:true,
-				rules:{ 
-					name:{
-						required:true,
-					}, 
+		var ajaxForm=function(slt,fuc){
+			if(fuc==undefined||fuc==null){
+				fuc=layer_close;
+			}
+			$(slt).validate({
+				errorElement: 'div',
+				errorClass: 'help-block',
+				focusInvalid: false,
+				ignore: "",
+				highlight: function (e) {
+					$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
 				},
-				onkeyup:false,
-				focusCleanup:true,
-				success:"valid",
-				submitHandler:function(form){ 
-					if($("input[name='pass']").val()!=$("input[name='agent_pass']").val()){
-						Huimodal_alert('两次密码不一致!',2000); 
-						return ;
+				success: function (e) {
+					$(e).closest('.form-group').removeClass('has-error');
+					$(e).remove();
+				},
+				errorPlacement: function (error, element) {
+					if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+						var controls = element.closest('div[class*="col-"]');
+						if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+						else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
 					}
+					else if(element.is('.select2')) {
+						error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+					}
+					else if(element.is('.chosen-select')) {
+						error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+					}
+					else error.insertAfter(element.parent());
+				},
 
-					$.post('{:U("")}',$('form').serialize() , function(data) { 
-						if(data.status==1){ 
-							Huimodal_alert('操作成功',2000);
-							setTimeout(function (argument) {
-								window.refresh();
-							},2000);
-							// var index = parent.layer.getFrameIndex(window.name);
-							// parent.$('.btn-refresh').click();
-							// parent.layer.close(index);
+				submitHandler: function (form) {
+					$.post('{:U()}', $(slt).serialize(), function(d) {
+						if(d.status==1){
+							alert_success(d.info,fuc);
 						}else{
-							Huimodal_alert(data.info,2000); 
+							alert_error(d.info);
 						}
-					}); 
+					});
 					return false;
+				},
+				invalidHandler: function (form) {
+
 				}
 			});
+		}
+		$(function () {
+			ajaxForm('#form-admin-add');
 		});
 	</script> 
 </block>

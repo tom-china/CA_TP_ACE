@@ -42,8 +42,8 @@ function layer_show(title,url,w,h){
 }
 /*关闭弹出框口*/
 function layer_close(){
-	var index = parent.layer.getFrameIndex(window.name);
-	parent.layer.close(index);
+	var index = layer.getFrameIndex(window.name);
+	layer.close(index);
 	location.reload();
 }
 
@@ -59,7 +59,7 @@ var alert_error=function (msg,fuc) {
 };
 
 var alert_success=function (msg,fuc) {
-	layer.msg(msg, {'icon': 1},fuc);
+	layer.msg(msg+'&nbsp;', {'icon': 1},fuc);
 };
 /**
  * 公共操作方法

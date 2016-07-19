@@ -5,7 +5,6 @@ class CommonAdminController extends AdminController {
 	{
 		parent::checkAuth('CommonAdmin.Index');
 		$s=D('CommonAdmin');
-		 $s->setPageRowsCount(2);
 		$p=$s->pageLis(I('kw'));
 		$this->pageInfo=$p;
 		$this->display();

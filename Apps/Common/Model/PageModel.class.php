@@ -20,9 +20,9 @@ class PageModel {
 
 	// 分页显示定制
     private $config  = array(
-    	'header' => '<li><span class="rows">共 %TOTAL_ROW% 条记录</span></li>',
-    	'prev'   => '<<',
-    	'next'   => '>>',
+    	'header' => '<li><span class="rows">共 %TOTAL_ROW% 条记录&nbsp;&nbsp;第%NOW_PAGE%/%TOTAL_PAGE%页</span></li>',
+    	'prev'   => '上一页',
+    	'next'   => '下一页',
     	'first'  => '1...',
     	'last'   => '...%TOTAL_PAGE%',
     	'theme'  => '%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%',

@@ -25,7 +25,7 @@ class IndexController extends AdminController {
     public function resetPwd()
     {
     	if(IS_POST){
-    		$s=D('Admin');
+    		$s=D('CommonAdmin');
     		$r=$s->resetPwd2(UID,I('old'),I('pass'));
     		$this->ajaxReturn($r);
     	}
@@ -36,7 +36,7 @@ class IndexController extends AdminController {
      * @param  string $value [description]
      * @return [type]        [description]
      */
-    public function personalInfo($value='')
+    public function profile($value='')
     {
         $this->info=session('AdminInfo');
         $this->display();

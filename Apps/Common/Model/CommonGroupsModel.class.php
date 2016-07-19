@@ -39,6 +39,6 @@ class CommonGroupsModel extends BaseModel
 			$adr[]=$ad;
 		}
 		$model->addAll($adr);
-		return RS();
+		return RS('保存成功');
 	}
 }

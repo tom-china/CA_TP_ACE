@@ -1,31 +1,35 @@
 <extend name="Public/base" />
+<block name='breadcrumb'>
+	<li><a href="#">管理员管理</a></li>
+	<li class="active">管理员列表</li>
+</block>
 <block name="body"> 
 	<div class="search_box"> 
-		<form method="get" action="">
-			<div class="input-group " style="width: 300px;">
-				<!-- <span class="input-group-addon">
-					<i class="ace-icon fa fa-check"></i>
-				</span> -->
-
-				<input type="text" class="form-control search-query" name="kw" value="{:I('kw')}" placeholder="输入管理员名称、电话">
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-purple btn-sm">
-						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-						搜管理员
-					</button>
-				</span>
-			</div>
-		</form>
+		
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray"> 
-		<span class="l"> 
+	<div class="search-area"> 
+		<span class="pull-left"> 
 			<a class="btn btn-xs btn-primary" href="javascript:;" onclick="layer_show('添加管理员','{:U("add")}','800','550')"><i class="glyphicon glyphicon-plus"></i> 添加管理员</a>
 		</span>
+		<div class="pull-right">
+			<form method="get" action="">
+				<div class="input-group " style="width: 300px;">
+					<input type="text" class="form-control search-query" name="kw" value="{:I('kw')}" placeholder="输入管理员名称、电话">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-purple btn-sm">
+							<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+							搜管理员
+						</button>
+					</span>
+				</div>
+			</form>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 
-	<table class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+	<table class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer" id="data-list-table" role="grid" aria-describedby="DataTables_Table_0_info">
 		<thead>
-			
+
 			<tr class="text-c" role="row">
 				<th width="80"   style="width: 100px;">管理员名称</th>
 				<th width="80"   style="width: 100px;">账号</th>

@@ -1,4 +1,8 @@
 <extend name="Public/base" />
+<block name='breadcrumb'>
+	<li><a href="#">管理员管理</a></li>
+	<li class="active">用户组管理</li>
+</block>
 <block name="body"> 
 	<!-- <div class="text-c"> 
 		<form method="get" action="">
@@ -6,30 +10,42 @@
 			<button type="submit" class="btn btn-success radius"  ><i class="Hui-iconfont"></i> 搜用户</button>
 		</form>
 	</div> -->
-	<div class="cl pd-5 bg-1 bk-gray"> 
-		<span class="l"> 
-			<a href="javascript:;" onclick="data_dels()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-			<a class="btn btn-primary radius" href="javascript:;" onclick="layer_show('添加用户组','{:U("add")}','800','350')"><i class="Hui-iconfont">&#xe600;</i> 添加用户组</a>
+	<div class="search-area"> 
+		<span class="pull-left"> 
+			<a href="javascript:;" onclick="data_dels()" class="btn btn-xs btn-danger">
+				<i class="ace-icon fa fa-trash-o bigger-130"></i> 批量删除
+			</a>
+			<a class="btn btn-xs btn-primary" href="javascript:;" onclick="layer_show('添加用户组','{:U("add")}','800','350')"><i class="glyphicon glyphicon-plus"></i> 添加用户组</a>
 		</span>
-		<span class="r">共有数据：<strong>54</strong> 条</span>
+		<span class="pull-right">共有数据：<strong>{$lis|count}</strong> 条</span>
+		<div class="clearfix"></div>
 	</div>
 
-	<table class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+	<table class="table table-border table-bordered table-hover table-bg table-sort dataTable no-footer" id="data-list-table" role="grid" aria-describedby="DataTables_Table_0_info">
 		<thead>
-			
 			<tr class="text-c" role="row">
-				<th width="25"><input type="checkbox" ></th>
-				<th width="80"   style="width: 80px;">ID</th>
-				<th width="80"   style="width: 80px;">用户组</th>
-				<th width="80"   style="width: 100px;">是否系统用户组</th>
-				<th >描述</th> 
-				<th width="80"  style="width: 80px;">操作</th>
+				<th width="25">
+					<label class="pos-rel">
+						<input type="checkbox" class="ace">
+						<span class="lbl"></span>
+					</label>
+				</th>
+				<th  style="width: 80px;">ID</th>
+				<th  style="width: 80px;">用户组</th>
+				<th  style="width: 120px;">是否系统用户组</th>
+				<th>描述</th> 
+				<th  style="width: 80px;">操作</th>
 			</tr>
 		</thead>
 		<tbody> 
 			<volist name='lis' id='item'> 
 				<tr class="text-c odd" role="row"> 
-					<td><input type="checkbox" value="{$item.id}" ></td>
+					<td>
+						<label class="pos-rel">
+							<input type="checkbox" value="{$item.id}" class="ace" />
+							<span class="lbl"></span>
+						</label>
+					</td>
 					<td>{$item.id}</td>
 					<td>{$item.name}</td>
 					<td>
@@ -38,17 +54,20 @@
 							<else/>
 							否
 						</eq>
-					</td>  
+					</td>
 					<td>{$item.intro}</td>
 					<td class="f-14">
-						<a title="权限管理" href="javascript:;" onclick="layer_show('权限管理','{:U('auth?id='.$item['id'])}')" ><i class="Hui-iconfont">&#xe637;</i>
+						<a title="权限管理" href="javascript:;"  onclick="layer_show('权限管理','{:U('auth?id='.$item['id'])}')" >
+							<i class="ace-icon fa fa-credit-card bigger-130"></i>
+						</a>
+						<a title="编辑" href="javascript:;" class="green" onclick="layer_show('编辑','{:U('modify?id='.$item['id'])}','800','350')" >
+							<i class="ace-icon fa fa-pencil bigger-130"></i>
 						</a> 
-						<a title="编辑" href="javascript:;" onclick="layer_show('编辑','{:U('modify?id='.$item['id'])}','800','350')" ><i class="Hui-iconfont">&#xe6df;</i>
-						</a> 
-						<a title="删除" href="javascript:;" onclick="self_del('{$item.id}')" class="ml-5"  ><i class="Hui-iconfont">&#xe6e2;</i>
+						<a title="删除" href="javascript:;" onclick="self_del('{$item.id}')" class="red"  >
+							<i class="ace-icon fa fa-trash-o bigger-130"></i>
 						</a>
 					</td>
-					
+
 				</tr>
 			</volist>
 		</tbody>
